@@ -122,8 +122,8 @@
           };
           # Super+E -> Ghostty running yazi as root
           "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
-            name = "Yazi (sudo)";
-            command = "ghostty -e sudo yazi";
+            name = "Yazi";
+            command = "ghostty -e yazi";
             binding = "<Super>e";
           };
           "org/gnome/desktop/input-sources" = {
