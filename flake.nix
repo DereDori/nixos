@@ -51,13 +51,14 @@
       ];
     };
 
-    nixosConfigurations.hyprland = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.hyprland-campus = nixpkgs.lib.nixosSystem {
       inherit system;
       # specialArgs makes `inputs` and `username` available to every module.
       specialArgs = {inherit inputs username;};
       modules = [
         ./hardware-configuration.nix
         ./modules/hyprland.nix
+        ./modules/system-campus.nix
         ./modules
         home-manager.nixosModules.home-manager
       ];
