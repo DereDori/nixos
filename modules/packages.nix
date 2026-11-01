@@ -18,13 +18,14 @@
     ];
   };
 
-virtualisation.virtualbox.host.enable = true;
-   users.extraGroups.vboxusers.members = [ "fbruggem" ];
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = ["thefool"];
 
   environment.systemPackages = with pkgs; [
     # Apps
     ghostty
     tmux
+    git
 
     # Editor + CLI
     neovim

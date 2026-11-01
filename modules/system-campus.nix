@@ -45,14 +45,14 @@
   # whatever is committed to main (and its flake.lock), catching up on the
   # next boot if the machine was off. To pull in new nixpkgs, run
   # `nix flake update` locally and push (or run ./rebuild.sh).
-  system.autoUpgrade = {
-    enable = true;
-    flake = "github:fbruggem/nixos";
-    dates = "06:00";
-    operation = "boot";
-    persistent = true;
-    allowReboot = false;
-  };
+  # system.autoUpgrade = {
+  #   enable = true;
+  #   flake = "github:fbruggem/nixos";
+  #   dates = "06:00";
+  #   operation = "boot";
+  #   persistent = true;
+  #   allowReboot = false;
+  # };
 
   # Time & locale
   time.timeZone = "Europe/Vienna";
@@ -80,8 +80,8 @@
   programs.git = {
     enable = true;
     config = {
-      user.name = "fbruggem";
-      user.email = "git@fbruggem.eu";
+      user.name = "deredori";
+      user.email = "deredori3@gmail.com";
       pull.rebase = false;
     };
   };

@@ -1,5 +1,5 @@
 {
-  description = "fbruggem's NixOS configuration";
+  description = "thefool's NixOS configuration";
 
   inputs = {
     # Track the 25.11 release. Bump this string to move releases.
@@ -22,7 +22,7 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    username = "fbruggem";
+    username = "thefool";
   in {
     nixosConfigurations.thinkpad-t480s = nixpkgs.lib.nixosSystem {
       inherit system;
@@ -36,7 +36,6 @@
         home-manager.nixosModules.home-manager
       ];
     };
-
 
     nixosConfigurations.campus = nixpkgs.lib.nixosSystem {
       inherit system;
