@@ -18,6 +18,12 @@
     ];
   };
 
+<<<<<<< HEAD
+=======
+virtualisation.virtualbox.host.enable = true;
+   users.extraGroups.vboxusers.members = [ "fbruggem" ];
+
+>>>>>>> 20c67d81e98ba5a3d0538b29f1237159c6c2d880
   environment.systemPackages = with pkgs; [
     # Apps
     ghostty
@@ -33,6 +39,7 @@
     nil # nix language server
     busybox
 
+<<<<<<< HEAD
     # C / systems programming
     man-pages
     clang
@@ -42,4 +49,13 @@
 
     bundletool
   ];
+=======
+      # C / systems programming
+      man-pages
+      clang
+      clang-tools # clangd
+      cargo
+      gdb
+    ];
+>>>>>>> 20c67d81e98ba5a3d0538b29f1237159c6c2d880
 }
