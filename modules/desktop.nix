@@ -92,7 +92,7 @@
           };
           "org/gnome/desktop/interface" = {
             scaling-factor = pkgs.lib.gvariant.mkUint32 1;
-            text-scaling-factor =  1.0;
+            text-scaling-factor = 1.0;
           };
         };
         lockAll = true; # enforce the settings strictly

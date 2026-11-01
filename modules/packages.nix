@@ -18,29 +18,28 @@
     ];
   };
 
-
   environment.systemPackages = with pkgs; [
-      # Apps
-      ghostty
-      tmux
+    # Apps
+    ghostty
+    tmux
 
-      # Editor + CLI
-      neovim
-      fzf
-      ripgrep
-      xclip
-      tree-sitter
-      nodejs
-      nil # nix language server
-      busybox
+    # Editor + CLI
+    neovim
+    fzf
+    ripgrep
+    xclip
+    tree-sitter
+    nodejs
+    nil # nix language server
+    busybox
 
-      # C / systems programming
-      man-pages
-      clang
-      clang-tools # clangd
-      cargo
-      gdb
+    # C / systems programming
+    man-pages
+    clang
+    clang-tools # clangd
+    cargo
+    gdb
 
-      bundletool
-    ];
+    bundletool
+  ];
 }
