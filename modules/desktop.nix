@@ -88,7 +88,7 @@
             "gtk-theme" = "Adwaita-dark";
           };
           "org/gnome/desktop/peripherals/mouse" = {
-            natural-scroll = true;
+              natural-scroll = false;
           };
           "org/gnome/desktop/interface" = {
             scaling-factor = pkgs.lib.gvariant.mkUint32 1;
