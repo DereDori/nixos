@@ -99,7 +99,7 @@
           # Super+W -> Zen browser
           "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
             name = "Zen Browser";
-            command = "zen";
+            command = "flatpak run app.zen_browser.zen";
             binding = "<Super>w";
           };
           # Super+T -> Ghostty
@@ -111,13 +111,13 @@
           # Super+R -> Obsidian
           "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
             name = "Obsidian";
-            command = "obsidian";
+            command = "flatpak run md.obsidian.Obsidian";
             binding = "<Super>r";
           };
           # Super+Y -> Discord
           "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
             name = "Discord";
-            command = "discord";
+            command = "flatpak run com.discordapp.Discord";
             binding = "<Super>y";
           };
           # Super+E -> Ghostty running yazi as root
