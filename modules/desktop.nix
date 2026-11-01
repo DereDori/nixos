@@ -52,6 +52,16 @@
           };
           "org/gnome/shell/keybindings" = {
             "show-screenshot-ui" = ["<Super>s"];
+            # Free up Super+1..9 (GNOME uses them to launch dash apps by default)
+            "switch-to-application-1" = pkgs.lib.gvariant.mkEmptyArray pkgs.lib.gvariant.type.string;
+            "switch-to-application-2" = pkgs.lib.gvariant.mkEmptyArray pkgs.lib.gvariant.type.string;
+            "switch-to-application-3" = pkgs.lib.gvariant.mkEmptyArray pkgs.lib.gvariant.type.string;
+            "switch-to-application-4" = pkgs.lib.gvariant.mkEmptyArray pkgs.lib.gvariant.type.string;
+            "switch-to-application-5" = pkgs.lib.gvariant.mkEmptyArray pkgs.lib.gvariant.type.string;
+            "switch-to-application-6" = pkgs.lib.gvariant.mkEmptyArray pkgs.lib.gvariant.type.string;
+            "switch-to-application-7" = pkgs.lib.gvariant.mkEmptyArray pkgs.lib.gvariant.type.string;
+            "switch-to-application-8" = pkgs.lib.gvariant.mkEmptyArray pkgs.lib.gvariant.type.string;
+            "switch-to-application-9" = pkgs.lib.gvariant.mkEmptyArray pkgs.lib.gvariant.type.string;
           };
           "org/gnome/desktop/background" = {
             "picture-uri" = "file://${../dotfiles/wallpaper.jpg}";
@@ -68,6 +78,7 @@
             "switch-to-workspace-4" = ["<Super>4"];
             "switch-to-workspace-5" = ["<Super>5"];
             "toggle-fullscreen" = ["<Super>f"];
+            "close" = ["<Super>q"];
           };
           "org/gnome/desktop/wm/preferences" = {
             "num-workspaces" = pkgs.lib.gvariant.mkInt32 5;
@@ -77,22 +88,61 @@
           };
           "org/gnome/settings-daemon/plugins/media-keys" = {
             "search" = ["<Control>space"];
+            "custom-keybindings" = [
+              "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+              "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+              "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+              "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"
+              "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/"
+            ];
+          };
+          # Super+W -> Zen browser
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+            name = "Zen Browser";
+            command = "zen";
+            binding = "<Super>w";
+          };
+          # Super+T -> Ghostty
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+            name = "Ghostty";
+            command = "ghostty";
+            binding = "<Super>t";
+          };
+          # Super+R -> Obsidian
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+            name = "Obsidian";
+            command = "obsidian";
+            binding = "<Super>r";
+          };
+          # Super+Y -> Discord
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+            name = "Discord";
+            command = "discord";
+            binding = "<Super>y";
+          };
+          # Super+E -> Ghostty running yazi as root
+          "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4" = {
+            name = "Yazi (sudo)";
+            command = "ghostty -e sudo yazi";
+            binding = "<Super>e";
           };
           "org/gnome/desktop/input-sources" = {
             "xkb-options" = ["caps:escape"];
           };
+          # merged: this block was defined twice before
           "org/gnome/desktop/interface" = {
             "enable-hot-corners" = false;
             enable-animations = false;
             "color-scheme" = "prefer-dark";
             "gtk-theme" = "Adwaita-dark";
-          };
-          "org/gnome/desktop/peripherals/mouse" = {
-              natural-scroll = false;
-          };
-          "org/gnome/desktop/interface" = {
             scaling-factor = pkgs.lib.gvariant.mkUint32 1;
             text-scaling-factor = 1.0;
+          };
+          "org/gnome/desktop/peripherals/mouse" = {
+            natural-scroll = false;
+          };
+          "org/gnome/desktop/peripherals/touchpad" = {
+            natural-scroll = false;
           };
         };
         lockAll = true; # enforce the settings strictly
