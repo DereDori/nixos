@@ -24,7 +24,7 @@
     system = "x86_64-linux";
     username = "thefool";
   in {
-    nixosConfigurations.thinkpad-t480s = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.hp = nixpkgs.lib.nixosSystem {
       inherit system;
       # specialArgs makes `inputs` and `username` available to every module.
       specialArgs = {inherit inputs username;};

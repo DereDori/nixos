@@ -5,7 +5,7 @@
   ...
 }: {
   system.stateVersion = "26.05";
-  networking.hostName = "thinkpad-t480s";
+  networking.hostName = "hp";
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
