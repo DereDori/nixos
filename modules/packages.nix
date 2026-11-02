@@ -36,6 +36,7 @@
     nodejs
     nil # nix language server
     busybox
+    yazi
 
     # C / systems programming
     man-pages
