@@ -87,7 +87,7 @@
             "dynamic-workspaces" = false;
           };
           "org/gnome/settings-daemon/plugins/media-keys" = {
-            "search" = ["<Control>space"];
+            "search" = ["<Super>space"];
             "custom-keybindings" = [
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
               "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
