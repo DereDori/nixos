@@ -37,6 +37,7 @@
     nil # nix language server
     busybox
     yazi
+    libreoffice-fresh
 
     # C / systems programming
     man-pages
