@@ -26,6 +26,7 @@
     ghostty
     tmux
     git
+    qbittorrent
 
     # Editor + CLI
     neovim
