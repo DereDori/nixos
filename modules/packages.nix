@@ -55,5 +55,13 @@
     cava
     reaper
     krita
+
+    # Sadly
+    fzf
+    curl
+    gnugrep
+    gnused
+    openssl
+     yt-dlp
   ];
 }
