@@ -51,17 +51,18 @@
 
     bundletool
     # Entertainment
-    ani-cli
     cava
     reaper
     krita
 
-    # Sadly
-    fzf
-    curl
-    gnugrep
-    gnused
-    openssl
-     yt-dlp
+    (ani-cli.overrideAttrs (old: {
+        version = "master-a9d789f";
+        src = fetchFromGitHub {
+          owner = "pystardust";
+          repo = "ani-cli";
+          rev = "a9d789ffeabcecb3d0fe0e118ee20ec7cd33c398";
+          hash = "sha256-5oEI4qUG0SlKmuRDezt3zLdSsHoMpjhtAacXHREIzpA=";
+        };
+    }))
   ];
 }
