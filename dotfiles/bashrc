@@ -38,3 +38,17 @@ rust-init() {
 }
 
 export PS1="\W> "
+
+# fzf: Ctrl-T (files), Alt-C (fuzzy cd into any subdir), Ctrl-R (history)
+export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
+export FZF_CTRL_T_COMMAND="fd --hidden --exclude .git"
+eval "$(fzf --bash)"
+
+# fcd: fuzzy-pick any directory below here (or below a given path) and cd into it
+fcd() {
+  local dir
+  dir=$(fd --type d --hidden --exclude .git . "${1:-.}" | fzf) && cd "$dir"
+}
+
+# zoxide: replaces cd with a learning version (cd proj -> ~/deep/path/proj)
+eval "$(zoxide init bash --cmd cd)"

@@ -41,6 +41,8 @@
     busybox
     yazi
     libreoffice-fresh
+    fd
+    zoxide
 
     # C / systems programming
     man-pages
@@ -50,11 +52,11 @@
     gdb
 
     bundletool
+
     # Entertainment
     cava
     reaper
     krita
-
     (ani-cli.overrideAttrs (old: {
         version = "master-a9d789f";
         src = fetchFromGitHub {
