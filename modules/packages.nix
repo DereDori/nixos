@@ -44,6 +44,8 @@
     fd
     zoxide
 
+    blender
+
     # C / systems programming
     man-pages
     clang

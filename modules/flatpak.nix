@@ -35,7 +35,6 @@
       "app.zen_browser.zen"
       "md.obsidian.Obsidian"
       "com.discordapp.Discord"
-      "org.freecad.FreeCAD"
 
       # Long form. Pinning a commit freezes the app (the update timer skips it);
       # list commits with `flatpak remote-info --log flathub <app-id>`.
