@@ -29,13 +29,24 @@
       # specialArgs makes `inputs` and `username` available to every module.
       specialArgs = {inherit inputs username;};
       modules = [
-        ./hardware-configuration.nix
+        ./hardware/hp.nix
         ./modules/desktop.nix
         ./modules
         home-manager.nixosModules.home-manager
       ];
     };
 
+    nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
+      inherit system;
+      # specialArgs makes `inputs` and `username` available to every module.
+      specialArgs = {inherit inputs username;};
+      modules = [
+        ./hardware/pc.nix
+        ./modules/desktop.nix
+        ./modules
+        home-manager.nixosModules.home-manager
+      ];
+    };
 
     nixosConfigurations.hyprland = nixpkgs.lib.nixosSystem {
       inherit system;
