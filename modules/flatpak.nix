@@ -35,6 +35,7 @@
       "app.zen_browser.zen"
       "md.obsidian.Obsidian"
       "com.discordapp.Discord"
+      "app/org.chromium.Chromium/x86_64/stable"
 
       # Long form. Pinning a commit freezes the app (the update timer skips it);
       # list commits with `flatpak remote-info --log flathub <app-id>`.
