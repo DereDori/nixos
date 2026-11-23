@@ -52,6 +52,7 @@
     clang-tools # clangd
     cargo
     gdb
+    claude-code
 
     bundletool
 
