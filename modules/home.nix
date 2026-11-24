@@ -5,7 +5,15 @@
     useUserPackages = true;
     extraSpecialArgs = {inherit username;};
 
-    users.${username} = {
+    users.${username} = let
+      # Matt Pocock's Claude Code skills (github:mattpocock/skills), pinned.
+      # To pick up new/updated skills: bump the commit in the url and refetch
+      # the hash with `nix-prefetch-url --unpack <url>`.
+      mpSkills = builtins.fetchTarball {
+        url = "https://github.com/mattpocock/skills/archive/d65391149dbb5fe76478e76fa8d5122b2aa5a70e.tar.gz";
+        sha256 = "024pfnbw1cdyh8pf54hcynxgbb3lizc2ck172xvkmirshp57szwj";
+      };
+    in {
       home.stateVersion = "26.05";
 
       # Dotfiles. Paths are relative to THIS file (modules/), hence ../dotfiles.
@@ -19,6 +27,15 @@
           source = ../dotfiles/nvim;
           recursive = true;
         };
+
+        # Selected Claude Code skills from mattpocock/skills.
+        ".claude/skills/grill-with-docs".source = "${mpSkills}/skills/engineering/grill-with-docs";
+        ".claude/skills/to-spec".source = "${mpSkills}/skills/engineering/to-spec";
+        ".claude/skills/implement-spec".source = "${mpSkills}/skills/engineering/implement-spec";
+        ".claude/skills/pr".source = "${mpSkills}/skills/engineering/pr";
+        ".claude/skills/retro".source = "${mpSkills}/skills/engineering/retro";
+        ".claude/skills/improve-codebase-architecture".source = "${mpSkills}/skills/engineering/improve-codebase-architecture";
+        ".claude/skills/teach".source = "${mpSkills}/skills/productivity/teach";
       };
 
       # direnv + nix-direnv: entering a project folder with an .envrc
