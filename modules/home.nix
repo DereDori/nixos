@@ -16,6 +16,11 @@
     in {
       home.stateVersion = "26.05";
 
+      home.sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+      };
+
       # Dotfiles. Paths are relative to THIS file (modules/), hence ../dotfiles.
       home.file = {
         ".config/tmux/tmux.conf".source = ../dotfiles/tmux.conf;
@@ -44,6 +49,24 @@
       programs.direnv = {
         enable = true;
         nix-direnv.enable = true;
+      };
+
+      # Open files/folders with nvim instead of yazi's nano fallback.
+      programs.yazi = {
+        enable = true;
+        settings = {
+          opener = {
+            edit = [
+              {run = ''nvim "$@"''; block = true; for = "unix";}
+            ];
+          };
+          open.rules = [
+            {name = "*/"; use = "edit";}
+            {mime = "text/*"; use = "edit";}
+            {mime = "application/json"; use = "edit";}
+            {mime = "application/x-shellscript"; use = "edit";}
+          ];
+        };
       };
     };
   };
