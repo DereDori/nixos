@@ -5,7 +5,7 @@
     useUserPackages = true;
     extraSpecialArgs = {inherit username;};
 
-    users.${username} = let
+    users.${username} = {pkgs, ...}: let
       # Matt Pocock's Claude Code skills (github:mattpocock/skills), pinned.
       # To pick up new/updated skills: bump the commit in the url and refetch
       # the hash with `nix-prefetch-url --unpack <url>`.
@@ -15,6 +15,8 @@
       };
     in {
       home.stateVersion = "26.05";
+
+      home.packages = with pkgs; [imv zathura];
 
       home.sessionVariables = {
         EDITOR = "nvim";
@@ -59,12 +61,20 @@
             edit = [
               {run = ''nvim "$@"''; block = true; for = "unix";}
             ];
+            image = [
+              {run = ''imv "$@"''; orphan = true; for = "unix";}
+            ];
+            pdf = [
+              {run = ''zathura "$@"''; orphan = true; for = "unix";}
+            ];
           };
           open.rules = [
             {url = "*/"; use = "edit";}
             {mime = "text/*"; use = "edit";}
             {mime = "application/json"; use = "edit";}
             {mime = "application/x-shellscript"; use = "edit";}
+            {mime = "image/*"; use = "image";}
+            {mime = "application/pdf"; use = "pdf";}
           ];
         };
       };
