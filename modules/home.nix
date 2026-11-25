@@ -61,7 +61,7 @@
             ];
           };
           open.rules = [
-            {name = "*/"; use = "edit";}
+            {url = "*/"; use = "edit";}
             {mime = "text/*"; use = "edit";}
             {mime = "application/json"; use = "edit";}
             {mime = "application/x-shellscript"; use = "edit";}
