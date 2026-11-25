@@ -54,6 +54,7 @@
     cargo
     gdb
     claude-code
+    python3
 
     bundletool
 
