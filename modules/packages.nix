@@ -2,6 +2,7 @@
 {
   pkgs,
   inputs,
+  username,
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
@@ -21,7 +22,7 @@
   programs.steam.enable = true;
   services.tailscale.enable = true;
   virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = ["thefool"];
+  users.extraGroups.vboxusers.members = [username];
 
   environment.systemPackages = with pkgs; [
     # Apps

@@ -22,12 +22,11 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    username = "thefool";
 
     # Builds one nixosConfiguration for a given host (hardware + identity,
-    # from ./hosts/<host>.nix) and desktop module (gnome or hyprland).
-    # `./modules` is shared across every host and every desktop choice.
-    mkHost = host: desktopModule:
+    # from ./hosts/<host>.nix), primary user, and desktop module (gnome or
+    # hyprland). `./modules` is shared across every host and desktop choice.
+    mkHost = host: username: desktopModule:
       nixpkgs.lib.nixosSystem {
         inherit system;
         # specialArgs makes `inputs` and `username` available to every module.
@@ -41,10 +40,10 @@
       };
   in {
     nixosConfigurations = {
-      hp = mkHost "hp" ./modules/desktop.nix;
-      "hp-hyprland" = mkHost "hp" ./modules/hyprland.nix;
-      pc = mkHost "pc" ./modules/desktop.nix;
-      "pc-hyprland" = mkHost "pc" ./modules/hyprland.nix;
+      hp = mkHost "hp" "thefool" ./modules/desktop.nix;
+      "hp-hyprland" = mkHost "hp" "thefool" ./modules/hyprland.nix;
+      pc = mkHost "pc" "thetower" ./modules/desktop.nix;
+      "pc-hyprland" = mkHost "pc" "thetower" ./modules/hyprland.nix;
     };
 
     templates.default = self.templates.rust;
