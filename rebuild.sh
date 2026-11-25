@@ -8,8 +8,21 @@ set -euo pipefail
 
 cd "$HOME/nixos"
 
-# Flake host: first arg if given, otherwise this machine's hostname.
-host="${1:-$HOSTNAME}"
+# Flake host: first arg if given, otherwise this machine's live hostname.
+# (Uses `hostname` rather than $HOSTNAME, which is a shell variable that
+# can be stale or unset depending on how the shell was started.)
+host="${1:-$(hostname)}"
+
+# Refuse to build a host attribute the flake doesn't actually define —
+# silently falling back to the wrong one applies the wrong machine's
+# hardware profile (disk UUIDs, kernel modules) and can make the next
+# boot unable to mount its own root/boot partitions.
+known_hosts="$(nix eval --json "$HOME/nixos#nixosConfigurations" --apply builtins.attrNames 2>/dev/null)"
+if ! echo "$known_hosts" | grep -q "\"$host\""; then
+  echo "error: '$host' is not a nixosConfigurations attribute (have: $known_hosts)" >&2
+  exit 1
+fi
+echo "Target host: ${host}"
 
 # Pull latest without clobbering local edits.
 git pull --ff-only || true
@@ -21,6 +34,10 @@ fi
 
 # Show what changed.
 git --no-pager diff -U0 || true
+
+# Stage everything (incl. new files) so the flake, which only sees tracked
+# files, can evaluate the current working tree.
+git add -A
 
 echo "Rebuilding (flake) → ${host}…"
 if ! sudo nixos-rebuild switch --flake "$HOME/nixos#$host"; then

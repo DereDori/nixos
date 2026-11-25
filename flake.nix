@@ -23,41 +23,28 @@
   } @ inputs: let
     system = "x86_64-linux";
     username = "thefool";
+
+    # Builds one nixosConfiguration for a given host (hardware + identity,
+    # from ./hosts/<host>.nix) and desktop module (gnome or hyprland).
+    # `./modules` is shared across every host and every desktop choice.
+    mkHost = host: desktopModule:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        # specialArgs makes `inputs` and `username` available to every module.
+        specialArgs = {inherit inputs username;};
+        modules = [
+          ./hosts/${host}.nix
+          desktopModule
+          ./modules
+          home-manager.nixosModules.home-manager
+        ];
+      };
   in {
-    nixosConfigurations.hp = nixpkgs.lib.nixosSystem {
-      inherit system;
-      # specialArgs makes `inputs` and `username` available to every module.
-      specialArgs = {inherit inputs username;};
-      modules = [
-        ./hardware/hp.nix
-        ./modules/desktop.nix
-        ./modules
-        home-manager.nixosModules.home-manager
-      ];
-    };
-
-    nixosConfigurations.pc = nixpkgs.lib.nixosSystem {
-      inherit system;
-      # specialArgs makes `inputs` and `username` available to every module.
-      specialArgs = {inherit inputs username;};
-      modules = [
-        ./hardware/pc.nix
-        ./modules/desktop.nix
-        ./modules
-        home-manager.nixosModules.home-manager
-      ];
-    };
-
-    nixosConfigurations.hyprland = nixpkgs.lib.nixosSystem {
-      inherit system;
-      # specialArgs makes `inputs` and `username` available to every module.
-      specialArgs = {inherit inputs username;};
-      modules = [
-        ./hardware-configuration.nix
-        ./modules/hyprland.nix
-        ./modules
-        home-manager.nixosModules.home-manager
-      ];
+    nixosConfigurations = {
+      hp = mkHost "hp" ./modules/desktop.nix;
+      "hp-hyprland" = mkHost "hp" ./modules/hyprland.nix;
+      pc = mkHost "pc" ./modules/desktop.nix;
+      "pc-hyprland" = mkHost "pc" ./modules/hyprland.nix;
     };
 
     templates.default = self.templates.rust;

@@ -1,27 +1,30 @@
 # Core system: boot, nix, users, networking, locale, time, git.
+# Host identity and hardware quirks live in ../hosts/*.nix, not here.
 {
   pkgs,
   username,
   ...
 }: {
   system.stateVersion = "26.05";
-  networking.hostName = "hp";
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModprobeConfig = ''
-    options snd-hda-intel model=17aa:2288
-  '';
-  # Fix Elan touchpad/TrackPoint interval lag introduced by a BIOS/EC firmware
-  # update (applied via Fedora's fwupd; persists in hardware, so it lags on any
-  # OS). Both internal pointers share I2C client 0-0015 on the shared i801
-  # SMBus that the EC also polls; the firmware change made that path stutter.
-  # This forces the touchpad to stay in PS/2 mode instead of upgrading to SMBus,
-  # bypassing the contended bus. A Bluetooth mouse is unaffected (separate USB
-  # radio). Trade-off: PS/2 mode drops some high-res multitouch gestures.
-  boot.kernelParams = ["psmouse.elantech_smbus=0"];
+  # Show the generation picker for a few seconds on every boot instead of
+  # jumping straight to the default entry, so a broken generation can be
+  # escaped by booting the previous one instead of needing rescue access.
+  boot.loader.timeout = 3;
+
+  # Root is locked (no password) by default on NixOS, which turns any drop
+  # into emergency/rescue mode into an unrecoverable "Login incorrect" loop
+  # at the password prompt. Point at a hash file outside the repo (this repo
+  # is public) so recovery is possible without publishing a crackable hash.
+  # Create it once per machine with:
+  #   sudo install -d -m 700 /etc/nixos-secrets
+  #   mkpasswd -m sha-512 | sudo tee /etc/nixos-secrets/root.hash >/dev/null
+  #   sudo chmod 600 /etc/nixos-secrets/root.hash
+  users.users.root.hashedPasswordFile = "/etc/nixos-secrets/root.hash";
 
   nixpkgs.config.allowUnfree = true;
 
