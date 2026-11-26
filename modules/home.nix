@@ -14,6 +14,8 @@
         sha256 = "024pfnbw1cdyh8pf54hcynxgbb3lizc2ck172xvkmirshp57szwj";
       };
     in {
+      imports = [./obsidian-plugins.nix];
+
       home.stateVersion = "26.05";
 
       home.packages = with pkgs; [imv zathura];
