@@ -62,9 +62,15 @@
     # Declarative Flatseal: same as `flatpak override --system ...`.
     # (This is the nix-flatpak 0.7 syntax; newer releases also accept it, and
     # prefer the same attrset under `overrides.settings`.)
-    # overrides = {
-    #   # Let Spotify's "Local Files" read ~/Music:
-    #   "com.spotify.Client".Context.filesystems = ["xdg-music:ro"];
-    # };
+    overrides = {
+      # Obsidian's vault plugins (modules/obsidian-plugins.nix) are
+      # home-manager-managed symlinks into /nix/store. The sandbox's default
+      # `filesystems=home` doesn't cover that path, so without this the
+      # plugin files resolve to nothing and Obsidian silently fails to load
+      # them. Read-only is enough since home-manager owns writes to it.
+      "md.obsidian.Obsidian".Context.filesystems = ["/nix/store:ro"];
+      # Example for granting another app a narrower path:
+      # "com.spotify.Client".Context.filesystems = ["xdg-music:ro"];
+    };
   };
 }
